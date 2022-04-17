@@ -1,0 +1,26 @@
+{
+  "name": "loginform",
+  "version": "1.0.0",
+  "description": "You don't need to accept this assignment since you are already assigned to teams. So, there is not assignment invite link for a99.",
+  "main": "server.js",
+  "scripts": {
+    "start" : "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-spring/a99-pollux.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-spring/a99-pollux/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-spring/a99-pollux#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express.js": "^1.0.0",
+    "knex": "^1.0.7",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3"
+  }
+}
