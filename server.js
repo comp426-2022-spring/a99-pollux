@@ -3,6 +3,8 @@ const app = express()
 const morgan = require('morgan')
 const db = require('./database')
 const path = require('path')
+
+const insertStatement = db.prepare('INSERT INTO userlog (email, password) VALUES (?, ?)');
 //const fs = require('fs')
 let initialPath = path.join(__dirname, "public");
 // Make express use its own built-in body parser
@@ -65,12 +67,19 @@ app.get('/register', (req, res) => {
     res.sendFile(path.join(initialPath, "register.html"));
 })
 
+app.get('/js/form.js', (req, res) => {
+    res.sendFile(path.join(initialPath, "js/form.js"));
+})
+
 app.post('/register-user', (req, res) => {
     const { name, email, password } = req.body;
 
     if(!name.length || !email.length || !password.length){
         res.json('fill all the fields');
     } else{
+        console.log('button works?');
+        const run = insertStatement.run(email, password);
+        /*
         db("userlog").insert({
             name: name,
             email: email,
@@ -85,6 +94,7 @@ app.post('/register-user', (req, res) => {
                 res.json('email already exists');
             }
         })
+        */
     }
 })
 
