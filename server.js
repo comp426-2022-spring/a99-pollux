@@ -46,6 +46,17 @@ app.use((req, res, next) => {
     res.sendFile(path.join(initialPath, "index.html"));
 })
 
+app.get("/app/users", (req,res) => {
+    res.json({"message": "yay"});
+    try {
+        const stmt = db.prepare('SELECT * FROM userlog').all()
+        res.status(200).json(stmt)
+    }
+    catch (e)
+{
+    console.error(e)
+}})
+
 app.get('/login', (req, res) => {
     res.sendFile(path.join(initialPath, "login.html"));
 })
