@@ -4,7 +4,7 @@
   "description": "You don't need to accept this assignment since you are already assigned to teams. So, there is not assignment invite link for a99.",
   "main": "server.js",
   "scripts": {
-    "start" : "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "body-parser": "^1.20.0",
     "express.js": "^1.0.0",
     "knex": "^1.0.7",
+    "minimist": "^1.2.6",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3"
   }
