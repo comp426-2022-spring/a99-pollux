@@ -21,7 +21,7 @@ if (row === undefined) {
     const sqlInit = `CREATE TABLE userlog ( id INTEGER NOT NULL PRIMARY KEY, email TEXT, password TEXT);`;
 
 // Execute SQL commands that we just wrote above.
-    logdb.exec(sqlInit);
+    db.exec(sqlInit);
 
 } else {
 // Since the database already exists, echo that to the console.
@@ -32,19 +32,19 @@ if (row === undefined) {
 //CREATING WELLNESS TABLE
 
 // Is the database initialized or do we need to initialize it?
-const stmt = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='wellnesslog';`);
+const stmt2 = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='wellnesslog';`);
 
 // Define row using `get()` from better-sqlite3
-let row = stmt.get();
+let row2 = stmt2.get();
 
 // Check if there is a table. If row is undefined then no table exists.
-if (row === undefined) {
+if (row2 === undefined) {
 
 // Set a const that will contain your SQL commands to initialize the database.
-    const sqlInit = `CREATE TABLE userlog ( id INTEGER NOT NULL PRIMARY KEY, wellness_rating INTEGER);`;
+    const sqlInit = `CREATE TABLE wellnesslog ( id INTEGER NOT NULL PRIMARY KEY, wellness_rating INTEGER);`;
 
 // Execute SQL commands that we just wrote above.
-    logdb.exec(sqlInit);
+    db.exec(sqlInit);
 
 } else {
 // Since the database already exists, echo that to the console.
