@@ -1,6 +1,10 @@
 body{
-    text-align:center;
-    background-color: lightblue;
+    margin: 0;
+    padding:0;
+    background:url(pixel-tracking-with-website-browser-cookies.jpg);
+    background-size:cover;
+    background-position:center;
+    font-family: sans-serif;
 }
 form{
     display: inline-block;
@@ -23,14 +27,53 @@ margin-left: 20px;
     padding: 5px;
 }
 
-.columnR{
-    float: right;
-    width: 33.33%;
-    padding: 5px;
-}
 
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
+  .surveyBox{
+      width: 320px;
+      height: 420px;
+      background: #000;
+      color: #fff;
+      top: 50%;
+      left:50%;
+      position: absolute;
+      transform: translate(-50%,-50%);
+      box-sizing: border-box;
+        padding: 40px;
+  }
+
+
+  .surveyBox p{
+      position:relative;
+      top: -200px;
+      
+    box-sizing: content-box;
+      font-weight: bold;
+  }
+  .surveyBox input{
+    position:relative;
+   top: -200px;
+   left: 0px;
+   box-sizing: content-box;
+    font-weight: bold;
+
+  }
+  .surveyBox textarea{
+    position:relative;
+    margin: 0;
+    padding:0;
+    top: -200px;
+    box-sizing: content-box;
+      width: 100%;
+
+  }
+  .surveyBox button{
+    position:relative;
+    margin: 0;
+    padding:0;
+    top: -180px;
+    left: 100px;
+  }
+
+  h1{
+      text-align: center;
   }
