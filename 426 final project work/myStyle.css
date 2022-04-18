@@ -1,0 +1,36 @@
+body{
+    text-align:center;
+    background-color: lightblue;
+}
+form{
+    display: inline-block;
+    padding-top: 200px;
+}
+
+.floatRight{
+float:right;
+margin-left: 20px;
+}
+
+.floatLeft{
+    float:left;
+    margin-right: 20px;
+}
+
+.columnL{
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+.columnR{
+    float: right;
+    width: 33.33%;
+    padding: 5px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
