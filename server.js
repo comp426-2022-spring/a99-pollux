@@ -5,6 +5,7 @@ const db = require('./database')
 const path = require('path')
 
 const insertStatement = db.prepare('INSERT INTO userlog (email, password) VALUES (?, ?)');
+
 //const fs = require('fs')
 let initialPath = path.join(__dirname, "public");
 // Make express use its own built-in body parser
@@ -73,12 +74,29 @@ app.get('/js/form.js', (req, res) => {
 
 app.post('/register-user', (req, res) => {
     const { name, email, password } = req.body;
+    //console.log('register user')
 
     if(!name.length || !email.length || !password.length){
         res.json('fill all the fields');
     } else{
-        console.log('button works?');
-        const run = insertStatement.run(email, password);
+        //console.log('button works?');
+        // if (db.prepare(checkBeforeInsertion).all() == null){
+        //     console.log('not there');
+        // }
+        const checkBeforeInsert = db.prepare('select * from userlog where email = ?').get(email);
+        if (checkBeforeInsert == null){
+            console.log('new user!');
+            const run = insertStatement.run(email, password);
+            //need to redirect to other page
+        }
+        else{
+            res.json('email already exists');
+        }
+
+        
+        
+        //const checkBeforeInsertion = db.prepare('select * from userlog where email = (testemail) VALUES (?)');
+        
         /*
         db("userlog").insert({
             name: name,
@@ -99,6 +117,7 @@ app.post('/register-user', (req, res) => {
 })
 
 app.post('/login-user', (req, res) => {
+    console.log('this endpoint reached')
     const { email, password } = req.body;
 
     db.select('name', 'email')
