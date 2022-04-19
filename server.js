@@ -36,11 +36,11 @@ app.use((req, res, next) => {
   app.use((req, res, next) => {
     let wellnessdata = {
       wellness_rating: req.wellness_rating,
+      time: Date.now()
     }
   
-    const stmt = db.prepare('INSERT INTO wellnesslog (wellness_rating) VALUES (?)')
-    const info = stmt.run(wellnessdata.wellness_rating)
-    
+    const stmt = db.prepare('INSERT INTO wellnesslog (wellness_rating, time) VALUES (?, ?)')
+    const info = stmt.run(wellnessdata.wellness_rating, wellnessdata.time)
     next()
   })
 
