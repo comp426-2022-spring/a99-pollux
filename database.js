@@ -18,7 +18,7 @@ let row = stmt.get();
 if (row === undefined) {
 
 // Set a const that will contain your SQL commands to initialize the database.
-    const sqlInit = `CREATE TABLE userlog ( id INTEGER NOT NULL PRIMARY KEY, email TEXT, password TEXT);`;
+    const sqlInit = `CREATE TABLE userlog ( id INTEGER NOT NULL PRIMARY KEY, name TEXT, email TEXT, password TEXT);`;
 
 // Execute SQL commands that we just wrote above.
     db.exec(sqlInit);

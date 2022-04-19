@@ -23,12 +23,13 @@ const server = app.listen(port, () => {
 
 app.use((req, res, next) => {
     let userlogindata = {
+      name: req.name,
       email: req.email,
       password: req.password
     }
   
-    const stmt = db.prepare('INSERT INTO userlog (email, password) VALUES (?, ?)')
-    const info = stmt.run(userlogindata.email, userlogindata.password)
+    const stmt = db.prepare('INSERT INTO userlog (name, email, password) VALUES (?, ?, ?)')
+    const info = stmt.run(userlogindata.name, userlogindata.email, userlogindata.password)
     
     next()
   })
@@ -111,6 +112,5 @@ app.post('/login-user', (req, res) => {
     }
     
 })
-
 
 
