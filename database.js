@@ -41,7 +41,7 @@ let row2 = stmt2.get();
 if (row2 === undefined) {
 
 // Set a const that will contain your SQL commands to initialize the database.
-    const sqlInit = `CREATE TABLE wellnesslog ( id INTEGER NOT NULL PRIMARY KEY, email TEXT, wellness_rating INTEGER);`;
+    const sqlInit = `CREATE TABLE wellnesslog ( id INTEGER NOT NULL PRIMARY KEY,  wellness_rating INTEGER, time INTEGER);`;
 
 // Execute SQL commands that we just wrote above.
     db.exec(sqlInit);
