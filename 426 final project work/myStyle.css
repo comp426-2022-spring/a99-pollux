@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    padding:0;
+    background:url(pixel-tracking-with-website-browser-cookies.jpg);
+    background-size:cover;
+    background-position:center;
+    font-family: sans-serif;
+}
+form{
+    display: inline-block;
+    padding-top: 200px;
+}
+
+.floatRight{
+float:right;
+margin-left: 20px;
+}
+
+.floatLeft{
+    float:left;
+    margin-right: 20px;
+}
+
+.columnL{
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+
+  .surveyBox{
+      width: 320px;
+      height: 420px;
+      background-color: rgba(0, 0,0, .5);
+      color: #fff;
+      top: 50%;
+      left:50%;
+      position: absolute;
+      transform: translate(-50%,-50%);
+      box-sizing: border-box;
+        padding: 40px;
+  }
+
+
+  .surveyBox p{
+      position:relative;
+      top: -200px;
+      
+    box-sizing: content-box;
+      font-weight: bold;
+  }
+  .surveyBox input{
+    position:relative;
+   top: -200px;
+   left: 0px;
+   box-sizing: content-box;
+    font-weight: bold;
+
+  }
+  .surveyBox textarea{
+    position:relative;
+    margin: 0;
+    padding:0;
+    top: -200px;
+    box-sizing: content-box;
+      width: 100%;
+
+  }
+  .surveyBox button{
+    position:relative;
+    margin: 0;
+    padding:0;
+    top: -180px;
+    left: 100px;
+  }
+
+  h1{
+      text-align: center;
+  }
