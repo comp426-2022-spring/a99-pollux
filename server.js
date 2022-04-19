@@ -72,67 +72,44 @@ app.get('/js/form.js', (req, res) => {
     res.sendFile(path.join(initialPath, "js/form.js"));
 })
 
+app.get('/user-info', (req,res) => {
+    const {email} = req.body;
+
+})
+
 app.post('/register-user', (req, res) => {
+
     const { name, email, password } = req.body;
-    //console.log('register user')
 
     if(!name.length || !email.length || !password.length){
         res.json('fill all the fields');
     } else{
-        //console.log('button works?');
-        // if (db.prepare(checkBeforeInsertion).all() == null){
-        //     console.log('not there');
-        // }
+        
         const checkBeforeInsert = db.prepare('select * from userlog where email = ?').get(email);
         if (checkBeforeInsert == null){
-            console.log('new user!');
+            
             const run = insertStatement.run(email, password);
-            //need to redirect to other page
+            res.json('new user created successfully');
+
         }
         else{
             res.json('email already exists');
-        }
-
+        } 
         
-        
-        //const checkBeforeInsertion = db.prepare('select * from userlog where email = (testemail) VALUES (?)');
-        
-        /*
-        db("userlog").insert({
-            name: name,
-            email: email,
-            password: password
-        })
-        .returning(["name", "email"])
-        .then(data => {
-            res.json(data[0])
-        })
-        .catch(err => {
-            if(err.detail.includes('already exists')){
-                res.json('email already exists');
-            }
-        })
-        */
     }
 })
 
 app.post('/login-user', (req, res) => {
-    console.log('this endpoint reached')
+    //console.log('this endpoint reached')
     const { email, password } = req.body;
-
-    db.select('name', 'email')
-    .from('userlog')
-    .where({
-        email: email,
-        password: password
-    })
-    .then(data => {
-        if(data.length){
-            res.json(data[0]);
-        } else{
-            res.json('email or password is incorrect');
-        }
-    })
+    const checkBeforeLogin = db.prepare('select * from userlog where email = ? and password = ?').get(email,password);
+    if (checkBeforeLogin == null){
+        res.json('email or password is wrong');
+    }
+    else{
+        res.json('need to figure out login');
+    }
+    
 })
 
 

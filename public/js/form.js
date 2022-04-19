@@ -19,6 +19,7 @@ const password = document.querySelector('.password');
 const submitBtn = document.querySelector('.submit-btn');
 
 if(name == null){ // means login page is open
+    console.log('if statement');
     submitBtn.addEventListener('click', () => {
         console.log('login button clicked?');
         fetch('/login-user',{
