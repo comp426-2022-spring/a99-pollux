@@ -7,7 +7,7 @@ const path = require('path')
 const insertStatement = db.prepare('INSERT INTO userlog (email, password) VALUES (?, ?)');
 
 //const fs = require('fs')
-let initialPath = path.join(__dirname, "public");
+let initialPath = path.join(__dirname, "public/");
 // Make express use its own built-in body parser
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
@@ -65,15 +65,15 @@ app.get("/app/users", (req,res) => {
 }})
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(initialPath, "../Login_Acc/loginPage.html"));
+    res.sendFile(path.join(initialPath, "Login_Acc/loginPage.html"));
 })
 
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(initialPath, "../Login_Acc/accountCreation.html"));
+    res.sendFile(path.join(initialPath, "Login_Acc/accountCreation.html"));
 })
 
 app.get('/survey', (req, res) => {
-    res.sendFile(path.join(initialPath, "../extraPages/surveyPage.html"));
+    res.sendFile(path.join(initialPath, "extraPages/surveyPage.html"));
 })
 
 app.get('/js/form.js', (req, res) => {
