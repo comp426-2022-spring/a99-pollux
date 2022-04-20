@@ -61,11 +61,11 @@ app.get("/app/users", (req,res) => {
 }})
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(initialPath, "login.html"));
+    res.sendFile(path.join(initialPath, "Login_Acc/loginPage.html"));
 })
 
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(initialPath, "register.html"));
+    res.sendFile(path.join(initialPath, "Login_Acc/accountCreation.html"));
 })
 
 app.get('/js/form.js', (req, res) => {

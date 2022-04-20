@@ -1,0 +1,87 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url(84248.png);
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+
+.container{
+    width: 420px;
+    height: 600px;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.container p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.container input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.container input[type=email], input[type=text], input[type=password] {
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+}
+
+.container button {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #fff;
+    color: #000;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.container button:hover {
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
+h6 {
+    margin-bottom: 10px;
+}
+
+.exist{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: white;
+}
+
+.container a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: darkslategray;
+}
+
+.container a:hover{
+    color: white;
+}
