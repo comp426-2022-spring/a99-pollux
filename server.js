@@ -23,9 +23,9 @@ const server = app.listen(port, () => {
 
 app.use((req, res, next) => {
     let userlogindata = {
-      Name: req.name,
-      Email: req.email,
-      Password: req.password
+      Name: req.Name,
+      Email: req.Email,
+      Password: req.Password
     }
   
     const stmt = db.prepare('INSERT INTO userlog (Name, Email, Password) VALUES (?, ?, ?)')
@@ -35,11 +35,12 @@ app.use((req, res, next) => {
   })
 
   app.use((req, res, next) => {
+    const d = new Date();
     let wellnessdata = {
-      Wellness_rating: req.wellness_rating,
-      Day: Date.getDate(),
-      Month: Date.getMonth(),
-      Year: Date.getYear()
+      Wellness_rating: req.Wellness_rating,
+      Day: d.getDate(),
+      Month: d.getMonth(),
+      Year: d.getYear()
     }
   
     const stmt = db.prepare('INSERT INTO wellnesslog (Wellness_rating, Day, Month, Year) VALUES (?, ?, ?, ?)')
@@ -64,11 +65,15 @@ app.get("/app/users", (req,res) => {
 }})
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(initialPath, "Login_Acc/loginPage.html"));
+    res.sendFile(path.join(initialPath, "../Login_Acc/loginPage.html"));
 })
 
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(initialPath, "Login_Acc/accountCreation.html"));
+    res.sendFile(path.join(initialPath, "../Login_Acc/accountCreation.html"));
+})
+
+app.get('/survey', (req, res) => {
+    res.sendFile(path.join(initialPath, "../extraPages/surveyPage.html"));
 })
 
 app.get('/js/form.js', (req, res) => {
