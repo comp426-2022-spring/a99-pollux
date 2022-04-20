@@ -23,25 +23,27 @@ const server = app.listen(port, () => {
 
 app.use((req, res, next) => {
     let userlogindata = {
-      name: req.name,
-      email: req.email,
-      password: req.password
+      Name: req.name,
+      Email: req.email,
+      Password: req.password
     }
   
-    const stmt = db.prepare('INSERT INTO userlog (name, email, password) VALUES (?, ?, ?)')
-    const info = stmt.run(userlogindata.name, userlogindata.email, userlogindata.password)
+    const stmt = db.prepare('INSERT INTO userlog (Name, Email, Password) VALUES (?, ?, ?)')
+    const info = stmt.run(userlogindata.Name, userlogindata.Email, userlogindata.Password)
     
     next()
   })
 
   app.use((req, res, next) => {
     let wellnessdata = {
-      wellness_rating: req.wellness_rating,
-      time: Date.now()
+      Wellness_rating: req.wellness_rating,
+      Day: Date.getDate(),
+      Month: Date.getMonth(),
+      Year: Date.getYear()
     }
   
-    const stmt = db.prepare('INSERT INTO wellnesslog (wellness_rating, time) VALUES (?, ?)')
-    const info = stmt.run(wellnessdata.wellness_rating, wellnessdata.time)
+    const stmt = db.prepare('INSERT INTO wellnesslog (Wellness_rating, Day, Month, Year) VALUES (?, ?, ?, ?)')
+    const info = stmt.run(wellnessdata.Wellness_rating, wellnessdata.Day, wellnessdata.Month, wellnessdata.Year)
     next()
   })
 
