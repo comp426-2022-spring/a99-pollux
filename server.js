@@ -64,26 +64,32 @@ app.get("/app/users", (req,res) => {
     console.error(e)
 }})
 
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(initialPath, "Login_Acc/loginPage.html"));
-})
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(initialPath, "Login_Acc/accountCreation.html"));
-})
+app.use(express.static(process.cwd() + '/public'))
+// app.get('/login', (req, res) => {
+//     res.sendFile(path.join(initialPath, "Login_Acc/loginPage.html"));
+// })
 
-app.get('/survey', (req, res) => {
-    res.sendFile(path.join(initialPath, "extraPages/surveyPage.html"));
-})
+// app.get('/register', (req, res) => {
+//     res.sendFile(path.join(initialPath, "Login_Acc/accountCreation.html"));
+// })
 
-app.get('/js/form.js', (req, res) => {
-    res.sendFile(path.join(initialPath, "js/form.js"));
-})
+// app.get('/survey', (req, res) => {
+//     res.sendFile(path.join(initialPath, "extraPages/surveyPage.html"));
+// })
 
-app.get('/user-info', (req,res) => {
-    const {email} = req.body;
+// app.get('/Login_Acc/form.css', (req, res) => {
+//     res.sendFile(path.join(initialPath, "css/form.js"));
+// })
 
-})
+// app.get('/js/form.js', (req, res) => {
+//     res.sendFile(path.join(initialPath, "js/form.js"));
+// })
+
+// app.get('/user-info', (req,res) => {
+//     const {email} = req.body;
+
+// })
 
 app.post('/register-user', (req, res) => {
 
