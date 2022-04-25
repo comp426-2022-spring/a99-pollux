@@ -6,6 +6,20 @@ const path = require('path')
 
 const insertStatement = db.prepare('INSERT INTO userlog (name, email, password) VALUES (?, ?, ?)');
 
+function firstDateLessThanSecondDate(day1,month1,year1,day2,month2,year2){
+    if (year1 < year2){
+        return true; 
+    }
+    if (year1 == year2 && month1 < month2){
+        return true;
+    }
+    if (year1 == year2 && month1 == month2 && day1 < day2){
+        return true;
+    }
+
+    return false;
+}
+
 //const fs = require('fs')
 let initialPath = path.join(__dirname, "public/");
 // Make express use its own built-in body parser
@@ -185,7 +199,38 @@ app.get('/get-wellness', (req,res) => {
                     yearArray.push(bunchofdata[i].Year);
                     wellnessArray.push(bunchofdata[i].Wellness_rating);
                 }
-                //need to sort
+                //bubble sort :/
+                for(var i = 0; i < dayArray.length; i++){
+     
+                     
+                    for(var j = 0; j < ( dayArray.length - i -1 ); j++){
+                        
+                      
+                      //if(dayArray[j] > dayArray[j+1] && monthArray[j] > monthArray[j+1] && yearArray[j] > yearArray[j+1]){
+                        if (firstDateLessThanSecondDate(dayArray[j+1], monthArray[j+1], yearArray[j+1], dayArray[j], monthArray[j], yearArray[j])){  
+                        
+                        var tempday = dayArray[j]
+                        var tempmonth = monthArray[j]
+                        var tempyear = yearArray[j]
+                        var tempwellness = wellnessArray[j]
+
+                        dayArray[j] = dayArray[j+1];
+                        monthArray[j] = monthArray[j+1];
+                        yearArray[j] = yearArray[j+1];
+                        wellnessArray[j] = wellnessArray[j+1];
+
+                        dayArray[j+1] = tempday;
+                        monthArray[j+1] = tempmonth;
+                        yearArray[j+1] = tempyear;
+                        wellnessArray[j+1] = tempwellness;
+
+                        //arr[j] = arr[j + 1]
+                        //arr[j+1] = temp
+                      }
+                    }
+                  }
+
+
                 res.status(200);
                 res.json({
                     message : "wellness retrieved successfully",
