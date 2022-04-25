@@ -295,6 +295,34 @@ app.post('/insert-wellness', (req,res) => {
     
 })
 
+app.post('/logout-user', (req,res) => {
+    console.log('logging out')
+    
+    const token = req.body.token;
+    const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
+    if (tokenUser == undefined){
+        res.status(400);
+        res.json({
+            message : "token not found in tokentable"
+        })
+    }
+    else if (tokenUser.length){
+        res.status(400);
+        res.json({
+            message : "this token corresponds to multiple users"
+        })
+    }
+    else{
+        const deleteStatement = db.prepare('delete from tokentable where token = ?');
+        const run = deleteStatement.run(token);
+        res.status(200);
+        res.json({
+            message : "user's token deleted from token table"
+        })
+        //const run = insertStatement.run(token, email);
+    }
+})
+
 
 
 
