@@ -66,30 +66,6 @@ app.get("/app/users", (req,res) => {
 
 
 app.use(express.static(process.cwd() + '/public'))
-// app.get('/login', (req, res) => {
-//     res.sendFile(path.join(initialPath, "Login_Acc/loginPage.html"));
-// })
-
-// app.get('/register', (req, res) => {
-//     res.sendFile(path.join(initialPath, "Login_Acc/accountCreation.html"));
-// })
-
-// app.get('/survey', (req, res) => {
-//     res.sendFile(path.join(initialPath, "extraPages/surveyPage.html"));
-// })
-
-// app.get('/Login_Acc/form.css', (req, res) => {
-//     res.sendFile(path.join(initialPath, "css/form.js"));
-// })
-
-// app.get('/js/form.js', (req, res) => {
-//     res.sendFile(path.join(initialPath, "js/form.js"));
-// })
-
-// app.get('/user-info', (req,res) => {
-//     const {email} = req.body;
-
-// })
 
 app.post('/register-user', (req, res) => {
     console.log('try to register')
@@ -155,11 +131,11 @@ app.post('/login-user', (req, res) => {
 app.get('/get-wellness', (req,res) => {
     console.log('getting wellness data')
     const token = req.body.token;
-    console.log(token);
-    const tokenUser = db.prepare('select * from tokentable where token = ?');
-    const cat = tokenUser.get(3333);
-    console.log(cat);
-    console.log(tokenUser);
+    //console.log(token);
+    const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
+    //const cat = tokenUser.get(3333);
+    //console.log(cat);
+    //console.log(tokenUser);
     if (tokenUser == undefined){
         res.status(400);
         res.json({
@@ -173,16 +149,53 @@ app.get('/get-wellness', (req,res) => {
         })
     }
     else{
-        const email = tokenUser.email;
+        const email = tokenUser.Email;
         const bunchofdata = db.prepare('select * from wellnesslog where email = ?').get(email);
-        console.log(bunchofdata)
+        //const bunchofdata = db.prepare('select distinct email,wellness_rating,day,month,year from wellnesslog where email = ? group by day').get(email);
+        //console.log(bunchofdata)
         if (bunchofdata == undefined){
+         //console.log(email);
          res.status(400);
             res.json(
-                {message : "email not found in wellnesslog",
-                queries : bunchofdata
+                {message : "email not found in wellnesslog"
             }
             );
+        }
+        else{
+            console.log(bunchofdata);
+            if (bunchofdata.length == undefined){
+                res.status(200);
+                res.json({
+                    message : "wellness retrieved successfully",
+                    email : email,
+                    dayArray : [bunchofdata.Day],
+                    monthArray : [bunchofdata.Month],
+                    yearArray : [bunchofdata.Year],
+                    wellnessArray : [bunchofdata.Wellness_rating]
+                })
+            }
+            else{
+                let dayArray = [];
+                let monthArray = [];
+                let yearArray = [];
+                let wellnessArray = [];
+                for (let i = 0; i < bunchofdata.length; i++){
+                    dayArray.push(bunchofdata[i].Day);
+                    monthArray.push(bunchofdata[i].Month);
+                    yearArray.push(bunchofdata[i].Year);
+                    wellnessArray.push(bunchofdata[i].Wellness_rating);
+                }
+                //need to sort
+                res.status(200);
+                res.json({
+                    message : "wellness retrieved successfully",
+                    email : email,
+                    dayArray : [bunchofdata.Day],
+                    monthArray : [bunchofdata.Month],
+                    yearArray : [bunchofdata.Year],
+                    wellnessArray : [bunchofdata.Wellness_rating]
+                })
+            }
         }
     }
          
@@ -210,10 +223,11 @@ app.post('/insert-wellness', (req,res) => {
         res.status(400);
         res.json({
             message : "this token corresponds to multiple users"
+            //this should never occur but if it does then we fucked something up
         })
     }
     else{
-        const email = tokenUser.email;
+        const email = tokenUser.Email;
         console.log(email);
         const existingWellness = db.prepare('select * from wellnesslog where email = ? and day = ? and month = ? and year = ?').get(email, day, month, year);
         if (existingWellness != undefined){

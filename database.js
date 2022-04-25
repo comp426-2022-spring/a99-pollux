@@ -41,7 +41,7 @@ let row2 = stmt2.get();
 if (row2 === undefined) {
 
 // Set a const that will contain your SQL commands to initialize the database.
-    const sqlInit = `CREATE TABLE wellnesslog ( Email TEXT PRIMARY KEY,  Wellness_rating INTEGER, Day INTEGER, Month INTEGER, Year INTEGER);`;
+    const sqlInit = `CREATE TABLE wellnesslog ( Email TEXT,  Wellness_rating INTEGER, Day INTEGER, Month INTEGER, Year INTEGER);`;
 
 // Execute SQL commands that we just wrote above.
     db.exec(sqlInit);
@@ -65,7 +65,7 @@ let row3 = stmt3.get();
 if (row3 === undefined) {
 
 // Set a const that will contain your SQL commands to initialize the database.
-    const sqlInit = `CREATE TABLE tokentable ( Token TEXT PRIMARY KEY, Email TEXT);`;
+    const sqlInit = `CREATE TABLE tokentable ( Token INTEGER PRIMARY KEY, Email TEXT);`;
 
 // Execute SQL commands that we just wrote above.
     db.exec(sqlInit);
