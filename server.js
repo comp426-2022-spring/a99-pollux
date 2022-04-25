@@ -150,7 +150,7 @@ app.get('/get-wellness', (req,res) => {
     }
     else{
         const email = tokenUser.Email;
-        const bunchofdata = db.prepare('select * from wellnesslog where email = ?').get(email);
+        const bunchofdata = db.prepare('select * from wellnesslog where email = ?').all(email);
         //const bunchofdata = db.prepare('select distinct email,wellness_rating,day,month,year from wellnesslog where email = ? group by day').get(email);
         //console.log(bunchofdata)
         if (bunchofdata == undefined){
@@ -162,7 +162,7 @@ app.get('/get-wellness', (req,res) => {
             );
         }
         else{
-            console.log(bunchofdata);
+            //console.log(bunchofdata);
             if (bunchofdata.length == undefined){
                 res.status(200);
                 res.json({
@@ -190,10 +190,10 @@ app.get('/get-wellness', (req,res) => {
                 res.json({
                     message : "wellness retrieved successfully",
                     email : email,
-                    dayArray : [bunchofdata.Day],
-                    monthArray : [bunchofdata.Month],
-                    yearArray : [bunchofdata.Year],
-                    wellnessArray : [bunchofdata.Wellness_rating]
+                    dayArray : dayArray,
+                    monthArray : monthArray,
+                    yearArray : yearArray,
+                    wellnessArray : wellnessArray
                 })
             }
         }
