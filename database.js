@@ -41,7 +41,7 @@ let row2 = stmt2.get();
 if (row2 === undefined) {
 
 // Set a const that will contain your SQL commands to initialize the database.
-    const sqlInit = `CREATE TABLE wellnesslog ( id INTEGER NOT NULL PRIMARY KEY,  Wellness_rating INTEGER, Day INTEGER, Month INTEGER, Year INTEGER);`;
+    const sqlInit = `CREATE TABLE wellnesslog ( Email TEXT PRIMARY KEY,  Wellness_rating INTEGER, Day INTEGER, Month INTEGER, Year INTEGER);`;
 
 // Execute SQL commands that we just wrote above.
     db.exec(sqlInit);
@@ -49,8 +49,31 @@ if (row2 === undefined) {
 } else {
 // Since the database already exists, echo that to the console.
     console.log('Wellness database exists.')
+    
 }
 
+
+//CREATING WELLNESS TABLE
+
+// Is the database initialized or do we need to initialize it?
+const stmt3 = db.prepare(`SELECT name FROM sqlite_master WHERE type='table' and name='tokentable';`);
+
+// Define row using `get()` from better-sqlite3
+let row3 = stmt3.get();
+
+// Check if there is a table. If row is undefined then no table exists.
+if (row3 === undefined) {
+
+// Set a const that will contain your SQL commands to initialize the database.
+    const sqlInit = `CREATE TABLE tokentable ( Token TEXT PRIMARY KEY, Email TEXT);`;
+
+// Execute SQL commands that we just wrote above.
+    db.exec(sqlInit);
+
+} else {
+// Since the database already exists, echo that to the console.
+    console.log('Token database exists.')
+}
 // Export all of the above as a module so that we can use it elsewhere.
 module.exports = db
 

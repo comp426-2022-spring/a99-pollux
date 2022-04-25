@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const db = require('./database')
 const path = require('path')
 
-const insertStatement = db.prepare('INSERT INTO userlog (email, password) VALUES (?, ?)');
+const insertStatement = db.prepare('INSERT INTO userlog (name, email, password) VALUES (?, ?, ?)');
 
 //const fs = require('fs')
 let initialPath = path.join(__dirname, "public/");
@@ -92,38 +92,152 @@ app.use(express.static(process.cwd() + '/public'))
 // })
 
 app.post('/register-user', (req, res) => {
-
+    console.log('try to register')
     const { name, email, password } = req.body;
 
     if(!name.length || !email.length || !password.length){
-        res.json('fill all the fields');
+        res.status(400);
+        res.json({
+            message : "fill out all fields"
+        });
     } else{
         
         const checkBeforeInsert = db.prepare('select * from userlog where email = ?').get(email);
         if (checkBeforeInsert == null){
             
-            const run = insertStatement.run(email, password);
-            res.json('new user created successfully');
+            const run = insertStatement.run(name, email, password);
+            res.status(200);
+            res.json({
+                message : "user created successfully"
+            });
 
         }
         else{
-            res.json('email already exists');
+            res.status(400);
+            res.json({
+                message : "email associated to another user"
+            });
         } 
         
     }
 })
 
 app.post('/login-user', (req, res) => {
-    //console.log('this endpoint reached')
+    console.log('login')
     const { email, password } = req.body;
+    if (!email.length || !password.length){
+        res.status(400);
+        res.json({
+            message : "fill out all fields"
+        })
+    }
     const checkBeforeLogin = db.prepare('select * from userlog where email = ? and password = ?').get(email,password);
     if (checkBeforeLogin == null){
-        res.json('email or password is wrong');
+        res.status(400);
+        res.json({
+            message : "email,password combo does not exist"
+        })
+        
     }
     else{
-        res.json('need to figure out login');
+        const token =  Math.floor(Math.random() * 1000000000);
+        const insertStatement = db.prepare('INSERT INTO tokentable (token, email) VALUES (?, ?)');
+        const run = insertStatement.run(token, email);
+        res.status(200);
+        res.json({
+            message : "login successful",
+            loginToken :  token
+        });
     }
     
 })
+
+app.get('/get-wellness', (req,res) => {
+    console.log('getting wellness data')
+    const token = req.body.token;
+    console.log(token);
+    const tokenUser = db.prepare('select * from tokentable where token = ?');
+    const cat = tokenUser.get(3333);
+    console.log(cat);
+    console.log(tokenUser);
+    if (tokenUser == undefined){
+        res.status(400);
+        res.json({
+            message : "token not found in tokentable"
+        })
+    }
+    else if (tokenUser.length){
+        res.status(400);
+        res.json({
+            message : "this token corresponds to multiple users"
+        })
+    }
+    else{
+        const email = tokenUser.email;
+        const bunchofdata = db.prepare('select * from wellnesslog where email = ?').get(email);
+        console.log(bunchofdata)
+        if (bunchofdata == undefined){
+         res.status(400);
+            res.json(
+                {message : "email not found in wellnesslog",
+                queries : bunchofdata
+            }
+            );
+        }
+    }
+         
+    
+})
+
+app.post('/insert-wellness', (req,res) => {
+    console.log('getting wellness data')
+    //const {token, wellness, day, month, year} = req.body;
+    const token = req.body.token;
+    const wellness = req.body.wellness;
+    const day = req.body.day;
+    const month = req.body.month;
+    const year = req.body.year;
+    //const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
+    const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
+    console.log(tokenUser);
+    if (tokenUser == null){
+        res.status(400);
+        res.json({
+            message : "token not found in tokentable"
+        })
+    }
+    else if (tokenUser.length){
+        res.status(400);
+        res.json({
+            message : "this token corresponds to multiple users"
+        })
+    }
+    else{
+        const email = tokenUser.email;
+        console.log(email);
+        const existingWellness = db.prepare('select * from wellnesslog where email = ? and day = ? and month = ? and year = ?').get(email, day, month, year);
+        if (existingWellness != undefined){
+            res.status(400);
+            res.json({
+                message: "wellness for this day has already been inserted"
+            })
+        }
+        else{
+            const stmt = db.prepare('INSERT INTO wellnesslog (email, Wellness_rating, Day, Month, Year) VALUES (?, ?, ?, ?, ?)')
+            const info = stmt.run(email, wellness, day, month, year)
+            res.status(200);
+            res.json({
+                message: "wellness for today has been inserted"
+            })
+        }
+        
+    }
+         
+    
+})
+
+
+
+
 
 
