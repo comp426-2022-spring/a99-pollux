@@ -145,7 +145,7 @@ app.post('/login-user', (req, res) => {
     
 })
 
-app.get('/get-wellness', (req,res) => {
+app.post('/get-wellness', (req,res) => {
     console.log('getting wellness data')
     const token = req.body.token;
     //console.log(token);

@@ -1,13 +1,70 @@
 
 <html> 
 
-  <link  rel='stylesheet' type="text/css" href="./graphCSS.css">
+  <link  rel='stylesheet' type="text/css" href="/css/graphCSS.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" >
 google.charts.load('current', {
           'packages': ['corechart']
         });
-        google.charts.setOnLoadCallback(drawChart);
+
+
+
+        var month = [2]//second
+        var day = [2]//second
+        var year = [2]//second
+        var rating = [2]//second
+        //getJson4();
+        
+        function getCookie(cookieName){
+    let cookie = {};
+    document.cookie.split(';').forEach(function(el) {
+    let [key,value] = el.split('=');
+    cookie[key.trim()] = value;
+  })
+  return cookie[cookieName];
+}
+
+async function getJson4(){
+
+const mytoken = parseInt(getCookie("token"))
+
+console.log(mytoken)
+
+
+const response = await fetch('/get-wellness',{
+    method: 'post',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({
+        
+        token: mytoken
+        
+
+    })})
+
+const my_json = await response.json();
+console.log(my_json);
+if (response.ok){
+
+   console.log('we good'); 
+   console.log(my_json.message);
+   month = my_json.monthArray;
+   day = my_json.dayArray;
+   year = my_json.yearArray;
+   rating = my_json.wellnessArray;
+
+   console.log(month)
+   //drawChart(myday,mymonth,myyear,mywellness);
+}
+else{
+    console.log(my_json.message);
+}
+
+}
+console.log(month)
+google.charts.setOnLoadCallback(drawChart());
+
+
 
         function drawChart() {
           
@@ -17,12 +74,15 @@ google.charts.load('current', {
           
 
          
-          var month =[3,3,3,3]//second
+          // month = mymonth//second
+          // day = myday//second
+          // year = myyear//second
+          // rating = myrating//second
 
-          var day = [1,2,3,4] //3rd 
+          // var day = [1,2,3,4] //3rd 
 
-          var year= [2015,2015,2015,2015]//first
-          var rating = [4,5,6,7]
+          // var year= [2015,2015,2015,2015]//first
+          // var rating = [4,5,6,7]
           
 
           
