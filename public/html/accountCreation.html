@@ -4,7 +4,7 @@
         <meta charset = "utf-8">
         <title>Account Creation</title>
         <link rel="stylesheet" href="/css/accStyle.css" type="text/css">
-        <base href="/"
+        <base href="/">
     </head>
     <body>
         <div class = "container">
@@ -14,24 +14,24 @@
 
 
             <p>Name</p>
-            <input type="text" name="" placeholder="Enter Name" class="name" required>
+            <input type="text" id = "name" name="" placeholder="Enter Name" class="name" required>
 
             <p>Email</p>
-            <input type="email" name="" placeholder="Enter Email" class="email" required>
+            <input type="email" id = "email" name="" placeholder="Enter Email" class="email" required>
 
             <p>Password</p>
-            <input type="password" name="" placeholder="Enter Password" class="password" required>
+            <input type="password" id = "password" name="" placeholder="Enter Password" class="password" required>
 
             <p>Re-enter Password</p>
             <input type="password" name="" placeholder="Re-enter Password" required>
 
 
-            <button class="submit-btn" onclick="window.location.href='/html/surveyPage.html'">Register</button>
+            <button class="submit-btn" id = "submit" >Register</button>
 
             <p class="exist">Already have an account? Login <a href="/html/loginPage.html">here</a></p>
 
         </div>
 
-        <script src="/js/form.js"></script>
+        <script src="/js/register.js"></script>
     </body>
 </html>

@@ -36,7 +36,7 @@ if(name == null){ // means login page is open
         })
     })
 } else{ // means register page is open
-
+    console.log('register button');
     submitBtn.addEventListener('click', () => {
         console.log("register button is clicked?");
         fetch('/register-user', {

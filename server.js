@@ -120,6 +120,7 @@ app.post('/login-user', (req, res) => {
         res.json({
             message : "fill out all fields"
         })
+        return;
     }
     const checkBeforeLogin = db.prepare('select * from userlog where email = ? and password = ?').get(email,password);
     if (checkBeforeLogin == null){
@@ -127,6 +128,7 @@ app.post('/login-user', (req, res) => {
         res.json({
             message : "email,password combo does not exist"
         })
+        return;
         
     }
     else{
@@ -138,6 +140,7 @@ app.post('/login-user', (req, res) => {
             message : "login successful",
             loginToken :  token
         });
+        return;
     }
     
 })
@@ -155,12 +158,14 @@ app.get('/get-wellness', (req,res) => {
         res.json({
             message : "token not found in tokentable"
         })
+        return;
     }
     else if (tokenUser.length){
         res.status(400);
         res.json({
             message : "this token corresponds to multiple users"
         })
+        return;
     }
     else{
         const email = tokenUser.Email;
@@ -174,6 +179,7 @@ app.get('/get-wellness', (req,res) => {
                 {message : "email not found in wellnesslog"
             }
             );
+            return;
         }
         else{
             //console.log(bunchofdata);
@@ -187,6 +193,7 @@ app.get('/get-wellness', (req,res) => {
                     yearArray : [bunchofdata.Year],
                     wellnessArray : [bunchofdata.Wellness_rating]
                 })
+                return;
             }
             else{
                 let dayArray = [];
@@ -240,6 +247,7 @@ app.get('/get-wellness', (req,res) => {
                     yearArray : yearArray,
                     wellnessArray : wellnessArray
                 })
+                return;
             }
         }
     }
@@ -263,6 +271,7 @@ app.post('/insert-wellness', (req,res) => {
         res.json({
             message : "token not found in tokentable"
         })
+        return;
     }
     else if (tokenUser.length){
         res.status(400);
@@ -270,6 +279,7 @@ app.post('/insert-wellness', (req,res) => {
             message : "this token corresponds to multiple users"
             //this should never occur but if it does then we fucked something up
         })
+        return;
     }
     else{
         const email = tokenUser.Email;
@@ -280,6 +290,7 @@ app.post('/insert-wellness', (req,res) => {
             res.json({
                 message: "wellness for this day has already been inserted"
             })
+            return;
         }
         else{
             const stmt = db.prepare('INSERT INTO wellnesslog (email, Wellness_rating, Day, Month, Year) VALUES (?, ?, ?, ?, ?)')
@@ -288,6 +299,7 @@ app.post('/insert-wellness', (req,res) => {
             res.json({
                 message: "wellness for today has been inserted"
             })
+            return;
         }
         
     }
@@ -305,12 +317,14 @@ app.post('/logout-user', (req,res) => {
         res.json({
             message : "token not found in tokentable"
         })
+        return;
     }
     else if (tokenUser.length){
         res.status(400);
         res.json({
             message : "this token corresponds to multiple users"
         })
+        return;
     }
     else{
         const deleteStatement = db.prepare('delete from tokentable where token = ?');
@@ -319,6 +333,7 @@ app.post('/logout-user', (req,res) => {
         res.json({
             message : "user's token deleted from token table"
         })
+        return;
         //const run = insertStatement.run(token, email);
     }
 })
