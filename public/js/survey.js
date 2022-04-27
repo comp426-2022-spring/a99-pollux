@@ -35,6 +35,7 @@ async function getJson3(mytoken, mymood){
 
        console.log('we good'); 
        console.log(my_json.message)
+       window.location = "/html/graph.html"
     }
     else{
         console.log(my_json.message);
@@ -45,5 +46,7 @@ document.getElementById("surveysubmit").onclick = function () {
     const mytoken = getCookie("token");
     const mymood = document.getElementById("mood_1").value; 
     getJson3(parseInt(mytoken), mymood);
+
+
     
 }
