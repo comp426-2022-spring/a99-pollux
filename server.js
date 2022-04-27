@@ -256,7 +256,7 @@ app.get('/get-wellness', (req,res) => {
 })
 
 app.post('/insert-wellness', (req,res) => {
-    console.log('getting wellness data')
+    console.log('inserting wellness data')
     //const {token, wellness, day, month, year} = req.body;
     const token = req.body.token;
     const wellness = req.body.wellness;
