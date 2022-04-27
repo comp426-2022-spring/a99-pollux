@@ -1,0 +1,37 @@
+
+
+
+    body{
+        margin: 0;
+        padding:0;
+        background:url(download-3.jpg);
+        background-size:cover;
+        background-position:center;
+        font-family: sans-serif;
+    }
+
+  
+    h1{
+        text-align: center;
+        color:violet;
+    }
+  
+  
+  
+  
+  .middle{
+      position: relative;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      position: absolute;
+  }
+  
+  .central{
+      position:absolute;
+      top: 90%;
+      left:50%;
+      transform: translate(-50%,-50%);
+  
+  }
+  
