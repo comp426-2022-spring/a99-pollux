@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(initialPath, "index.html"));
+    res.sendFile(path.join(initialPath, "html/index.html"));
 })
 
 app.get("/app/users", (req,res) => {
