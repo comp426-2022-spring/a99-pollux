@@ -17,7 +17,7 @@ async function getJson(myname, mypassword, myemail){
     }
     else{
         console.log(my_json.message);
-        res.json("Could not register. Please check that all fields are filled out correctly.")
+        alert("Could not register. Please check that all fields are filled out correctly.")
     }
     //console.log(my_json.message);
     //console.log(response.ok);

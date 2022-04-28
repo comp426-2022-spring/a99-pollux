@@ -23,7 +23,7 @@ async function getJson2(myemail, mypassword){
     }
     else{
         console.log(my_json.message);
-        res.json("Incorrect Login. Please check your email and password are correct.")
+        alert("Incorrect Login. Please check your email and password are correct.")
     }
     
 }

@@ -5,7 +5,60 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" >
 
+async function logout(mytoken){
 
+    
+
+
+const response = await fetch('/logout-user',{
+    method: 'post',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({
+        
+        token: mytoken
+
+    })})
+
+const my_json = await response.json();
+
+if (response.ok){
+
+   console.log('we good'); 
+   console.log(my_json.message)
+   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+   window.location = "/html/loginPage.html";
+}
+else{
+    console.log(my_json.message);
+}
+
+}
+
+
+function getCookie(cookieName){
+    let cookie = {};
+    document.cookie.split(';').forEach(function(el) {
+    let [key,value] = el.split('=');
+    cookie[key.trim()] = value;
+  })
+  return cookie[cookieName];
+}
+/*
+getElementById("logout").onclick = function () {
+    console.log('hiiii')
+    const mytoken = getCookie("token");
+    logout(parseInt(mytoken));
+
+
+    
+}
+*/
+
+function logoutClick(){
+    console.log('hiiii')
+    const mytoken = getCookie("token");
+    logout(parseInt(mytoken));
+}
 google.charts.load('current', {
           'packages': ['corechart']
         });
@@ -150,7 +203,7 @@ google.charts.setOnLoadCallback(drawChart);
 
     <div id="chart_div" class="middle"></div>
     <button id="change" class="central">Click to change the format</button>
-
+    <button id="logout" onclick = "logoutClick()" class = "central2">Logout</button>
 
   </div>
 
