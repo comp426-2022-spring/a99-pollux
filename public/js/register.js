@@ -1,7 +1,7 @@
 
 
 async function getJson(myname, mypassword, myemail){
-    const response = await fetch('/register-user',{
+    const response = await fetch('/app/register-user',{
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify({

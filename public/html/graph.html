@@ -10,7 +10,7 @@ async function logout(mytoken){
     
 
 
-const response = await fetch('/logout-user',{
+const response = await fetch('/app/logout-user',{
     method: 'post',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify({
@@ -87,7 +87,7 @@ const mytoken = parseInt(getCookie("token"))
 console.log(mytoken)
 
 
-const response = await fetch('/get-wellness',{
+const response = await fetch('/app/get-wellness',{
     method: 'post',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify({

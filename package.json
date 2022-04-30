@@ -4,7 +4,9 @@
   "description": "You don't need to accept this assignment since you are already assigned to teams. So, there is not assignment invite link for a99.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "test": "node test.js"
+    
   },
   "repository": {
     "type": "git",

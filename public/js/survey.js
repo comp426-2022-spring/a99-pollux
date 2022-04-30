@@ -1,5 +1,5 @@
 
-//this function is from w3schools
+
 function getCookie(cookieName){
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
@@ -14,7 +14,7 @@ async function logout(mytoken){
     
 
 
-    const response = await fetch('/logout-user',{
+    const response = await fetch('/app/logout-user',{
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify({
@@ -46,7 +46,7 @@ async function getJson3(mytoken, mymood){
     const myday = d.getDate();
 
 
-    const response = await fetch('/insert-wellness',{
+    const response = await fetch('/app/insert-wellness',{
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify({

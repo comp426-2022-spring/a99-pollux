@@ -1,7 +1,7 @@
 
 
 async function getJson2(myemail, mypassword){
-    const response = await fetch('/login-user',{
+    const response = await fetch('/app/login-user',{
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify({
@@ -16,7 +16,6 @@ async function getJson2(myemail, mypassword){
 
         const token = my_json.loginToken;
         console.log(my_json.message)
-        //console.log(token)
         document.cookie = "token=" + token + "; path=/";
         console.log(document.cookie)
         window.location = "/html/surveyPage.html"

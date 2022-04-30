@@ -64,9 +64,9 @@ app.use((req, res, next) => {
 
 
   app.get('/', (req, res) => {
-    res.sendFile(path.join(initialPath, "html/index.html"));
+    res.sendFile(path.join(initialPath, "html/accountCreation.html"));
 })
-
+/*
 app.get("/app/users", (req,res) => {
     res.json({"message": "yay"});
     try {
@@ -77,11 +77,12 @@ app.get("/app/users", (req,res) => {
 {
     console.error(e)
 }})
+*/
 
 
 app.use(express.static(process.cwd() + '/public'))
 
-app.post('/register-user', (req, res) => {
+app.post('/app/register-user', (req, res) => {
     console.log('try to register')
     const { name, email, password } = req.body;
 
@@ -112,7 +113,7 @@ app.post('/register-user', (req, res) => {
     }
 })
 
-app.post('/login-user', (req, res) => {
+app.post('/app/login-user', (req, res) => {
     console.log('login')
     const { email, password } = req.body;
     if (!email.length || !password.length){
@@ -145,7 +146,7 @@ app.post('/login-user', (req, res) => {
     
 })
 
-app.post('/get-wellness', (req,res) => {
+app.post('/app/get-wellness', (req,res) => {
     console.log('getting wellness data')
     const token = req.body.token;
     //console.log(token);
@@ -255,7 +256,7 @@ app.post('/get-wellness', (req,res) => {
     
 })
 
-app.post('/insert-wellness', (req,res) => {
+app.post('/app/insert-wellness', (req,res) => {
     console.log('inserting wellness data')
     //const {token, wellness, day, month, year} = req.body;
     const token = req.body.token;
@@ -307,7 +308,7 @@ app.post('/insert-wellness', (req,res) => {
     
 })
 
-app.post('/logout-user', (req,res) => {
+app.post('/app/logout-user', (req,res) => {
     console.log('logging out')
     
     const token = req.body.token;
