@@ -83,7 +83,7 @@ app.get("/app/users", (req,res) => {
 app.use(express.static(process.cwd() + '/public'))
 
 app.post('/app/register-user', (req, res) => {
-    console.log('try to register')
+
     const { name, email, password } = req.body;
 
     if(!name.length || !email.length || !password.length){
@@ -114,7 +114,7 @@ app.post('/app/register-user', (req, res) => {
 })
 
 app.post('/app/login-user', (req, res) => {
-    console.log('login')
+
     const { email, password } = req.body;
     if (!email.length || !password.length){
         res.status(400);
@@ -147,13 +147,11 @@ app.post('/app/login-user', (req, res) => {
 })
 
 app.post('/app/get-wellness', (req,res) => {
-    console.log('getting wellness data')
+
     const token = req.body.token;
-    //console.log(token);
+
     const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
-    //const cat = tokenUser.get(3333);
-    //console.log(cat);
-    //console.log(tokenUser);
+
     if (tokenUser == undefined){
         res.status(400);
         res.json({
@@ -171,10 +169,9 @@ app.post('/app/get-wellness', (req,res) => {
     else{
         const email = tokenUser.Email;
         const bunchofdata = db.prepare('select * from wellnesslog where email = ?').all(email);
-        //const bunchofdata = db.prepare('select distinct email,wellness_rating,day,month,year from wellnesslog where email = ? group by day').get(email);
-        //console.log(bunchofdata)
+
         if (bunchofdata == undefined){
-         //console.log(email);
+ 
          res.status(400);
             res.json(
                 {message : "email not found in wellnesslog"
@@ -183,7 +180,7 @@ app.post('/app/get-wellness', (req,res) => {
             return;
         }
         else{
-            //console.log(bunchofdata);
+
             if (bunchofdata.length == undefined){
                 res.status(200);
                 res.json({
@@ -214,7 +211,7 @@ app.post('/app/get-wellness', (req,res) => {
                     for(var j = 0; j < ( dayArray.length - i -1 ); j++){
                         
                       
-                      //if(dayArray[j] > dayArray[j+1] && monthArray[j] > monthArray[j+1] && yearArray[j] > yearArray[j+1]){
+
                         if (firstDateLessThanSecondDate(dayArray[j+1], monthArray[j+1], yearArray[j+1], dayArray[j], monthArray[j], yearArray[j])){  
                         
                         var tempday = dayArray[j]
@@ -232,8 +229,7 @@ app.post('/app/get-wellness', (req,res) => {
                         yearArray[j+1] = tempyear;
                         wellnessArray[j+1] = tempwellness;
 
-                        //arr[j] = arr[j + 1]
-                        //arr[j+1] = temp
+
                       }
                     }
                   }
@@ -257,16 +253,14 @@ app.post('/app/get-wellness', (req,res) => {
 })
 
 app.post('/app/insert-wellness', (req,res) => {
-    console.log('inserting wellness data')
-    //const {token, wellness, day, month, year} = req.body;
+
     const token = req.body.token;
     const wellness = req.body.wellness;
     const day = req.body.day;
     const month = req.body.month;
     const year = req.body.year;
-    //const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
     const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
-    console.log(tokenUser);
+
     if (tokenUser == null){
         res.status(400);
         res.json({
@@ -278,13 +272,13 @@ app.post('/app/insert-wellness', (req,res) => {
         res.status(400);
         res.json({
             message : "this token corresponds to multiple users"
-            //this should never occur but if it does then we fucked something up
+
         })
         return;
     }
     else{
         const email = tokenUser.Email;
-        console.log(email);
+
         const existingWellness = db.prepare('select * from wellnesslog where email = ? and day = ? and month = ? and year = ?').get(email, day, month, year);
         if (existingWellness != undefined){
             res.status(400);
@@ -309,7 +303,7 @@ app.post('/app/insert-wellness', (req,res) => {
 })
 
 app.post('/app/logout-user', (req,res) => {
-    console.log('logging out')
+
     
     const token = req.body.token;
     const tokenUser = db.prepare('select * from tokentable where token = ?').get(token);
@@ -335,7 +329,7 @@ app.post('/app/logout-user', (req,res) => {
             message : "user's token deleted from token table"
         })
         return;
-        //const run = insertStatement.run(token, email);
+
     }
 })
 

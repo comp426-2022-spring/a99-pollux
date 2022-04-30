@@ -15,13 +15,13 @@ async function getJson2(myemail, mypassword){
     if (response.ok){
 
         const token = my_json.loginToken;
-        console.log(my_json.message)
+
         document.cookie = "token=" + token + "; path=/";
-        console.log(document.cookie)
+
         window.location = "/html/surveyPage.html"
     }
     else{
-        console.log(my_json.message);
+
         alert("Incorrect Login. Please check your email and password are correct.")
     }
     

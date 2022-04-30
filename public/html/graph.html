@@ -23,13 +23,12 @@ const my_json = await response.json();
 
 if (response.ok){
 
-   console.log('we good'); 
-   console.log(my_json.message)
+
    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
    window.location = "/html/loginPage.html";
 }
 else{
-    console.log(my_json.message);
+
 }
 
 }
@@ -43,19 +42,10 @@ function getCookie(cookieName){
   })
   return cookie[cookieName];
 }
-/*
-getElementById("logout").onclick = function () {
-    console.log('hiiii')
-    const mytoken = getCookie("token");
-    logout(parseInt(mytoken));
 
-
-    
-}
-*/
 
 function logoutClick(){
-    console.log('hiiii')
+
     const mytoken = getCookie("token");
     logout(parseInt(mytoken));
 }
@@ -98,25 +88,23 @@ const response = await fetch('/app/get-wellness',{
     })})
 
 const my_json = await response.json();
-console.log(my_json);
+
 if (response.ok){
 
-   console.log('we good'); 
-   console.log(my_json.message);
+
    month = my_json.monthArray;
    day = my_json.dayArray;
    year = my_json.yearArray;
    rating = my_json.wellnessArray;
 
-   console.log(month)
-   //drawChart(myday,mymonth,myyear,mywellness);
+   
 }
 else{
-    console.log(my_json.message);
+
 }
 
 }
-console.log(month)
+
 google.charts.setOnLoadCallback(drawChart);
 
 
@@ -129,25 +117,7 @@ google.charts.setOnLoadCallback(drawChart);
           
 
          
-          // month = mymonth//second
-          // day = myday//second
-          // year = myyear//second
-          // rating = myrating//second
-
-          // var day = [1,2,3,4] //3rd 
-
-          // var year= [2015,2015,2015,2015]//first
-          // var rating = [4,5,6,7]
-          
-
-          
         
-        
-
-           // var apple= [[new Date(2015, 3, 3),7]]
-
-
-            //write the function to handle differengt data later
             
   
           for(var x=0; x< year.length; x++){
