@@ -9,5 +9,6 @@ This file describes the `/app/login-user` endpoint.
     * `password`: string.
 * Response parameters:
     * `message`
+    * `token` if the login is successful
 
 Message relays whether the login was successful or not.  
