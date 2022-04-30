@@ -6,11 +6,14 @@ You don't need to accept this assignment since you are already assigned to teams
 
 ## Summary 
 
-COMP426 final project template repository.
-All your code and documentation goes here.
-Change this text to be a brief description of your final project.
-Put the name of your project in the header above.
-You will change everything below to be the main technical documentation, as outlined below.
+Our team, team Pollux, created a wellness tracker app, where people can log their wellness.  Use our website to log your mood progression each day and see how your wellness has changed over time. Today more than ever being in tune with ones needs physically and mentally is so crucial to a healthy balance in life. Our goal is to aid you in the growth and promotion your mental health.
+
+##Installation
+
+Setup:
+
+Run npm install to get necessary dependencies.  
+Run npm start to start the server, and go to http://localhost:5555/
 
 ## First steps
 
